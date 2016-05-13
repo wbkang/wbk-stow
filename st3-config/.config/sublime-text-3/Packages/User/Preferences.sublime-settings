@@ -2,6 +2,7 @@
 	"color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
 	"dpi_scale": 1.2,
 	"font_size": 11,
+	"detect_indentation": true,
 	"ignored_packages":
 	[
 		"Vintage"
