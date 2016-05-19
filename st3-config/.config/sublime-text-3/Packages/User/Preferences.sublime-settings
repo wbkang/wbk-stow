@@ -1,10 +1,12 @@
 {
 	"color_scheme": "Packages/Color Scheme - Default/Sunburst.tmTheme",
+	"detect_indentation": true,
 	"dpi_scale": 1.2,
 	"font_size": 11,
-	"detect_indentation": true,
 	"ignored_packages":
 	[
 		"Vintage"
-	]
+	],
+	"hot_exit": true,
+	"remember_open_files": false
 }
