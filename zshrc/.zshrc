@@ -1,3 +1,6 @@
+# load oh-my-zsh if available
+[ -d ~/.oh-my-zsh ] && source ~/.zshrc.omz
+
 autoload -U add-zsh-hook
 autoload -U colors && colors
 autoload -U compinit && compinit
