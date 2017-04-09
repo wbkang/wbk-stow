@@ -53,6 +53,13 @@ export PATH="$HOME/wbk/bin:$PATH"
 # shift-tab auto-complete
 bindkey '^[[Z' reverse-menu-complete
 
+# assume default DISPLAY if on WSL
+if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
+    export DISPLAY=:0
+    bindkey '^R' history-incremental-search-backward
+fi
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
