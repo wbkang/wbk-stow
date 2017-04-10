@@ -52,6 +52,8 @@ export PATH="$HOME/wbk/bin:$PATH"
 
 # shift-tab auto-complete
 bindkey '^[[Z' reverse-menu-complete
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
