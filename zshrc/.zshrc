@@ -61,7 +61,14 @@ if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
     bindkey '^R' history-incremental-search-backward
 fi
 
+# Cygwin hax
+if [[ "$(uname -o)" = "Cygwin" ]]; then
+	export SHELLOPTS="igncr"
+fi
+
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
 
