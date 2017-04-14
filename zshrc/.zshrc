@@ -52,6 +52,8 @@ export PATH="$HOME/wbk/bin:$PATH"
 
 # shift-tab auto-complete
 bindkey '^[[Z' reverse-menu-complete
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 
 # assume default DISPLAY if on WSL
 if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
@@ -65,7 +67,14 @@ if [[ -f /etc/zsh_command_not_found ]]; then
     source /etc/zsh_command_not_found
 fi
 
+# Cygwin hax
+if [[ "$(uname -o)" = "Cygwin" ]]; then
+	export SHELLOPTS="igncr"
+fi
+
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
 
