@@ -18,6 +18,16 @@ sync_display() {
 
 add-zsh-hook preexec sync_display
 
+print_tmux_colors() {
+    for i in {0..31}; do
+        for j in {0..7}; do
+            idx=$((j+i*8))
+            printf "\x1b[38;5;${idx}m%-10s\x1b[0m" "colour${idx}"
+        done
+        printf "\n"
+    done
+}
+
 # display how long it look to execute last command
 record_last_command_time() {
 	_wbk_last_command_time=${timer:-$SECONDS}
@@ -69,12 +79,14 @@ fi
 
 # Cygwin hax
 if [[ "$(uname -o)" = "Cygwin" ]]; then
+    export DISPLAY=:0
 	export SHELLOPTS="igncr"
 fi
-
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
-
+if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
+    tmux attach-session -t default || tmux new-session -s default
+fi
