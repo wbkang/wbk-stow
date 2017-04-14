@@ -57,6 +57,12 @@ bindkey '^[[Z' reverse-menu-complete
 if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
     export DISPLAY=:0
     bindkey '^R' history-incremental-search-backward
+    umask 022
+fi
+
+# command not found handler
+if [[ -f /etc/zsh_command_not_found ]]; then
+    source /etc/zsh_command_not_found
 fi
 
 if [[ -f ~/.zshrc.local ]]; then
