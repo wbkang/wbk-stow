@@ -41,8 +41,18 @@ display_last_command_time() {
 	fi
 }
 
+change_title_to_pwd() {
+    printf "\033k$(pwd)\007"
+}
+
+change_title_to_command() {
+    printf "\033k%s\007" $1
+}
+
 add-zsh-hook preexec record_last_command_time
+add-zsh-hook preexec change_title_to_command
 add-zsh-hook precmd display_last_command_time
+add-zsh-hook precmd change_title_to_pwd
 
 # pretty prompt to my liking
 PROMPT="%{$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[green]%}%M"
