@@ -41,12 +41,16 @@ display_last_command_time() {
 	fi
 }
 
+set_window_title() {
+    printf '\033k%s\033\\' "$1"
+}
+
 change_title_to_pwd() {
-    printf "\033k$(pwd)\007"
+    set_window_title "$(print -P "%~")"
 }
 
 change_title_to_command() {
-    printf "\033k%s\007" $1
+    set_window_title "$1"
 }
 
 add-zsh-hook preexec record_last_command_time
