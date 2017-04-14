@@ -40,7 +40,7 @@ PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[white]%}\$ %{
 
 # pretty git log
 alias glog="git log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"
-
+alias grep="grep --color"
 alias ls='ls --color'
 
 if which vim > /dev/null; then
