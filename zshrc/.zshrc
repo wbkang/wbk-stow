@@ -102,5 +102,9 @@ if [[ -f ~/.zshrc.local ]]; then
 fi
 
 if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
-    exec tmux attach-session -t default || exec tmux new-session -s default
+    if tmux list-sessions | grep "^default:" > /dev/null; then
+        exec tmux attach-session -t default 
+    else
+        exec tmux new-session -s default
+    fi
 fi
