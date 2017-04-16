@@ -92,7 +92,7 @@ add-zsh-hook precmd change_title_to_pwd
 
 # pretty prompt to my liking
 PROMPT="%{$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[green]%}%M"
-PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[white]%}\$ %{$reset_color%}"
+PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[cyan]%}[%!] %{$fg_bold[white]%}\$ %{$reset_color%}"
 
 # pretty git log
 alias glog="git log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"
@@ -136,6 +136,10 @@ fi
 install_antigen() {
     git clone https://github.com/zsh-users/antigen.git ~/antigen
 }
+
+# ctrl+left right to move between words
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
