@@ -1,10 +1,8 @@
-# load oh-my-zsh if available
-#[ -d ~/.oh-my-zsh ] && source ~/.zshrc.omz
+
 if [[ -d ~/antigen ]]; then
     source ~/antigen/antigen.zsh
     antigen bundle git
     antigen bundle pip
-    antigen bundle command-not-found
     antigen bundle zsh-users/zsh-syntax-highlighting
     antigen bundle ssh-agent
 
@@ -24,8 +22,11 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-# highlight autocomplet menu
+# highlight autocomplete menu
 zstyle ':completion:*' menu select
+
+# pushd on cd
+setopt AUTO_PUSHD
 
 # save history
 HISTSIZE=5000
@@ -97,6 +98,9 @@ PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[white]%}\$ %{
 alias glog="git log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"
 alias grep="grep --color"
 alias ls='ls --color'
+
+# shift+tab to go back
+bindkey '^[[Z' reverse-menu-complete
 
 if which vim > /dev/null; then
     export VISUAL=vim
