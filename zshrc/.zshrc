@@ -1,9 +1,40 @@
 # load oh-my-zsh if available
-[ -d ~/.oh-my-zsh ] && source ~/.zshrc.omz
+#[ -d ~/.oh-my-zsh ] && source ~/.zshrc.omz
+if [[ -d ~/antigen ]]; then
+    source ~/antigen/antigen.zsh
+    antigen bundle git
+    antigen bundle pip
+    antigen bundle command-not-found
+    antigen bundle zsh-users/zsh-syntax-highlighting
+    antigen bundle ssh-agent
+
+    if [[ "$(uname -o)" = "Cygwin" ]]; then
+        antigen bundle cygwin
+    fi
+    antigen apply
+fi
 
 autoload -U add-zsh-hook
 autoload -U colors && colors
 autoload -U compinit && compinit
+
+# auto-complete case-insensitive, hyphen insensitive
+# partial-word matching. Copied from OMZ
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+# highlight autocomplet menu
+zstyle ':completion:*' menu select
+
+# save history
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=10000
+HISTDUPE=erase
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
 
 # sync displays across terminals
 sync_display() {
@@ -97,6 +128,11 @@ if [[ "$(uname -o)" = "Cygwin" ]]; then
 	export SHELLOPTS="igncr"
 fi
 
+# antigen install
+install_antigen() {
+    git clone https://github.com/zsh-users/antigen.git ~/antigen
+}
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
@@ -108,3 +144,4 @@ if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
         exec tmux new-session -s default
     fi
 fi
+
