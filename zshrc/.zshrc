@@ -162,6 +162,13 @@ stty stop '^-'
 # stop rogue apps from changing stty
 ttyctl -f
 
+# reload all of my zsh
+trap "echo Reloading zsh; exec zsh" USR1
+
+reload_all_zsh() {
+    pkill -U $USER --signal USR1 zsh
+}
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
