@@ -24,6 +24,17 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 # highlight autocomplete menu
 zstyle ':completion:*' menu select
+# show info messages during autocomplete
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:messages' format "$fg_bold[white]%d$reset_color"
+zstyle ':completion:*:warnings' format "$fg_bold[red]No match: $reset_color%d"
+zstyle ':completion:*:descriptions' format "$fg_bold[yellow]# %d%b$reset_color"
+zstyle ':completion:*:corrections' format "$fg_bold[magenta]%B: $reset_color%d (errors: %e)%b"
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*' group-name ''
+
+# ignore completion functions
+zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # pushd on cd
 setopt AUTO_PUSHD
