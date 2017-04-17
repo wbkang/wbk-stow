@@ -33,9 +33,14 @@ HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
 HISTDUPE=erase
+setopt hist_ignore_dups
 setopt appendhistory
 setopt sharehistory
 setopt incappendhistory
+setopt extendedhistory
+
+# extended glob
+setopt extended_glob
 
 # sync displays across terminals
 sync_display() {
@@ -92,7 +97,7 @@ add-zsh-hook precmd change_title_to_pwd
 
 # pretty prompt to my liking
 PROMPT="%{$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[green]%}%M"
-PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[cyan]%}[%!] %{$fg_bold[white]%}\$ %{$reset_color%}"
+PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[cyan]%}[%!] %{$fg_bold[white]%}%# %{$reset_color%}"
 
 # pretty git log
 alias glog="git log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"
@@ -140,6 +145,11 @@ install_antigen() {
 # ctrl+left right to move between words
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# remove the stupid suspend
+stty stop '^-'
+# stop rogue apps from changing stty
+ttyctl -f
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
