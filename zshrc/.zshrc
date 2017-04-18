@@ -94,7 +94,7 @@ set_window_title() {
 }
 
 change_title_to_pwd() {
-    set_window_title "$(print -P "%~")"
+    set_window_title "$(print -P "%25<...<%~%<<")"
 }
 
 change_title_to_command() {
@@ -175,9 +175,9 @@ fi
 
 if command -v tmux > /dev/null && [ -z "$TMUX" ]; then
     if tmux list-sessions | grep "^default:" > /dev/null; then
-        exec tmux attach-session -t default 
+        tmux attach-session -t default 
     else
-        exec tmux new-session -s default
+        tmux new-session -s default
     fi
 fi
 
