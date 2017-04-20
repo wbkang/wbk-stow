@@ -114,6 +114,7 @@ PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[cyan]%}[%!] %
 alias glog="git log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"
 alias grep="grep --color"
 alias ls='ls --color'
+alias gitk='gitk --all &!'
 
 # shift+tab to go back
 bindkey '^[[Z' reverse-menu-complete
