@@ -116,6 +116,11 @@ alias grep="grep --color"
 alias ls='ls --color'
 alias gitk='gitk --all &!'
 
+# make gui applications easier to use
+gui() {
+    "$@" > "/tmp/gui.$1.$$.log" 2>&1 &
+}
+
 # shift+tab to go back
 bindkey '^[[Z' reverse-menu-complete
 
