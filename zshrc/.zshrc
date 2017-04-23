@@ -90,7 +90,7 @@ display_last_command_time() {
 }
 
 set_window_title() {
-    printf '\033k%s\033\\' "$1"
+    printf '\033]2;%s\007' "$1" 
 }
 
 change_title_to_pwd() {
