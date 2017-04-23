@@ -131,6 +131,9 @@ bindkey '^[[Z' reverse-menu-complete
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
 
+# tmux+zsh hax
+bindkey '^R' history-incremental-search-backward
+
 # assume default DISPLAY if on WSL
 if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
     export DISPLAY=:0
