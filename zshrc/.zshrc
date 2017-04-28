@@ -153,7 +153,7 @@ fi
 
 # Cygwin hax
 if [[ "$(uname -o)" = "Cygwin" ]]; then
-    export DISPLAY=:0
+    export DISPLAY=localhost:0
 	export SHELLOPTS="igncr"
 fi
 
