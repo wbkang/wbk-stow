@@ -118,7 +118,7 @@ alias gitk='gitk --all &!'
 
 # make gui applications easier to use
 gui() {
-    "$@" > "/tmp/gui.$1.$$.log" 2>&1 &
+    "$@" > "/tmp/gui.$(basename $1).$$.log" 2>&1 &
 }
 
 # shift+tab to go back
