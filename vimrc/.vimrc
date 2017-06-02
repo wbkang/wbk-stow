@@ -74,8 +74,11 @@ fu! RestoreSession()
     endif
 endfunction
 
-" autocmd VimLeave * NERDTreeClose | mksession! Session.vim
+" autocmd VimLeave * NERDTreeClose | mksessio! Session.vim
 " autocmd VimEnter * nested call RestoreSession() | NERDTree
-"
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_filetype_blacklist= {'c':1}
+
+if has('gui_running')
+    color jellybeans
+endif
