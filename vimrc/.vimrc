@@ -76,3 +76,8 @@ endfunction
 
 autocmd VimLeave * NERDTreeClose | mksession! Session.vim
 " autocmd VimEnter * nested call RestoreSession() | NERDTree
+
+if has('gui_running')
+    color jellybeans
+endif
+
