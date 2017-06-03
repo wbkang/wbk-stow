@@ -48,7 +48,7 @@ nnoremap <C-1> :YcmCompleter FixIt<CR>
 inoremap <F2> <ESC>:YcmCompleter GetDoc<CR>
 inoremap <F3> <ESC>:YcmCompleter GoTo<CR>
 inoremap <C-1> <ESC>:YcmCompleter FixIt<CR>
-nnoremap <C-x> :close<CR>
+nnoremap <Leader>x :close<CR>
 nnoremap <Leader>t :NERDTree<CR>
 nnoremap <Leader>o :TagBarToggle<CR>
 autocmd FileType python nnoremap <buffer> <F8> :call Autopep8()<CR>
