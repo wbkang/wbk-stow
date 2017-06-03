@@ -8,6 +8,6 @@
 	fontui = -family \"DejaVu Sans\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 	fontdiff = -family NanumGothicCoding -size 13 -weight normal -slant roman -underline 0 -overstrike 0
 [merge]
-	tool = kdiff3
+	tool = vimdiff
 [push]
 	default = simple

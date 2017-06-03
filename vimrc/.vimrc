@@ -9,12 +9,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-commentary'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'valloric/youcompleteme'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
 call vundle#end()
 filetype plugin indent on
 " Vundle end
@@ -48,8 +50,13 @@ nnoremap <C-1> :YcmCompleter FixIt<CR>
 inoremap <F2> <ESC>:YcmCompleter GetDoc<CR>
 inoremap <F3> <ESC>:YcmCompleter GoTo<CR>
 inoremap <C-1> <ESC>:YcmCompleter FixIt<CR>
+" f for search
+nnoremap <Leader>f :Ack 
+" x to close
 nnoremap <Leader>x :close<CR>
+" t for tree
 nnoremap <Leader>t :NERDTree<CR>
+" o for outline
 nnoremap <Leader>o :TagBarToggle<CR>
 autocmd FileType python nnoremap <buffer> <F8> :call Autopep8()<CR>
 let g:autopep8_max_line_length=100
@@ -74,11 +81,29 @@ fu! RestoreSession()
     endif
 endfunction
 
-" autocmd VimLeave * NERDTreeClose | mksessio! Session.vim
-" autocmd VimEnter * nested call RestoreSession() | NERDTree
+" NERDTree compatible session managemnet
+command Mksession NERDTreeClose | mksession!
+command RestoreSession call RestoreSession() | NERDTree
+
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_filetype_blacklist= {'c':1}
 
-if has('gui_running')
-    color jellybeans
-endif
+color jellybeans
+
+" use ag for ack
+let g:ackprg = 'ag --vimgrep'
+
+" fix confusing nerdtree shortcuts
+let NERDTreeMapOpenVSplit='v'
+let NERDTreeMapOpenSplot='h'
+
+" fix diff highlight
+fun! SetDiffColors()
+    highlight DiffAdd ctermfg=white ctermbg=Green
+    highlight DiffDelete ctermfg=white ctermbg=DarkRed
+    highlight DiffChange ctermfg=white ctermbg=DarkBlue
+    highlight DiffText ctermfg=white ctermbg=DarkGrey
+endfun
+autocmd FilterWritePre * call SetDiffColors()
+
+
