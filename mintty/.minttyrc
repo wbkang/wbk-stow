@@ -20,3 +20,5 @@ Cyan=161,239,228
 BoldCyan=95,227,210
 White=248,248,242
 BoldWhite=249,248,245
+BoldAsFont=-1
+Term=xterm-256color
