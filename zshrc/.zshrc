@@ -116,6 +116,10 @@ alias grep="grep --color"
 alias ls='ls --color'
 alias gitk='gitk --all &!'
 
+if ! command -v vi && command -v vim; then
+    alias vi=vim
+fi
+
 # make gui applications easier to use
 gui() {
     "$@" > "/tmp/gui.$(basename $1).$$.log" 2>&1 &
