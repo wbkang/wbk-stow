@@ -116,7 +116,7 @@ alias grep="grep --color"
 alias ls='ls --color'
 alias gitk='gitk --all &!'
 
-if ! command -v vi && command -v vim; then
+if ! command -v vi > /dev/null && command -v vim > /dev/null; then
     alias vi=vim
 fi
 
