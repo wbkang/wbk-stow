@@ -94,7 +94,8 @@ color jellybeans
 let g:ackprg = 'ag --vimgrep'
 
 " fix confusing nerdtree shortcuts
-let NERDTreeMapOpenVSplit='v'
+
+et NERDTreeMapOpenVSplit='v'
 let NERDTreeMapOpenSplot='h'
 
 " fix diff highlight
@@ -106,4 +107,6 @@ fun! SetDiffColors()
 endfun
 autocmd FilterWritePre * call SetDiffColors()
 
-
+if has('gui_running') && has('win32')
+    set guifont=Consolas:h12
+endif
