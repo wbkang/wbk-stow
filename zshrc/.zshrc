@@ -145,7 +145,7 @@ bindkey '^R' history-incremental-search-backward
 
 # assume default DISPLAY if on WSL
 if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
-    export DISPLAY=:0
+    export DISPLAY=localhost:0
     bindkey '^R' history-incremental-search-backward
     umask 022
 fi
