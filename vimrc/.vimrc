@@ -95,7 +95,7 @@ let g:ackprg = 'ag --vimgrep'
 
 " fix confusing nerdtree shortcuts
 
-et NERDTreeMapOpenVSplit='v'
+let NERDTreeMapOpenVSplit='v'
 let NERDTreeMapOpenSplot='h'
 
 " fix diff highlight
