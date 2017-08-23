@@ -148,6 +148,8 @@ if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
     export DISPLAY=localhost:0
     bindkey '^R' history-incremental-search-backward
     umask 022
+    # Docker on Windows host
+    export DOCKER_HOST=tcp://127.0.0.1:2375
 fi
 
 # command not found handler
