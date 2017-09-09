@@ -128,6 +128,9 @@ gui() {
 # shift+tab to go back
 bindkey '^[[Z' reverse-menu-complete
 
+# fix delete on gentoo
+bindkey "\x1b\x5b\x33\x7e" delete-char
+
 if which vim > /dev/null; then
     export VISUAL=vim
     export EDITOR="$VISUAL"
