@@ -187,9 +187,15 @@ reload_all_zsh() {
     pkill -U $USER --signal USR1 zsh
 }
 
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source ~/.cargo/env
+fi
+
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
 alias install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

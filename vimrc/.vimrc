@@ -1,26 +1,22 @@
 set nocompatible
 
-" Vundle start
-filetype off
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'valloric/youcompleteme'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
-call vundle#end()
-filetype plugin indent on
-" Vundle end
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+" Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'nanotech/jellybeans.vim'
+Plug 'nvie/vim-flake8'
+Plug 'tell-k/vim-autopep8'
+Plug 'valloric/youcompleteme'
+Plug 'sheerun/vim-polyglot'
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+call plug#end()
 
 let g:ycm_python_binary_path = 'python3'
 syntax on
@@ -67,6 +63,12 @@ hi StatusLine   ctermfg=7  ctermbg=1 cterm=bold
 hi StatusLineNC ctermfg=1 ctermbg=7 cterm=none
 set ttymouse=xterm2
 set mouse=a
+
+" fzf mappings
+nmap <Leader>p :Files<CR>
+nmap <C-p> :GFiles<CR>
+nmap <C-h> :Ag<CR>
+
 
 " Session hax
 fu! RestoreSession()
