@@ -195,7 +195,11 @@ if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
-alias install_vundle="git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+local localrc="~/.zshrc.$(hostname)"
+if [[ -f "$localrc" ]]; then
+    source "$localrc"
+fi
 
+alias install_vimplug="curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
