@@ -66,6 +66,7 @@ set mouse=a
 
 " fzf mappings
 nmap <Leader>p :Files<CR>
+nmap <Leader>b :Buffers<CR>
 nmap <C-p> :GFiles<CR>
 nmap <C-h> :Ag<CR>
 
