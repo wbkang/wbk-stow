@@ -69,6 +69,7 @@ nmap <Leader>p :Files<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <C-p> :GFiles<CR>
 nmap <C-h> :Ag<CR>
+vmap <Leader>h "zy :Ag <C-R>z<CR>
 
 
 " Session hax
