@@ -115,3 +115,9 @@ autocmd FilterWritePre * call SetDiffColors()
 if has('gui_running') && has('win32')
     set guifont=Consolas:h12
 endif
+
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
