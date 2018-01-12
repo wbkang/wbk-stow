@@ -65,9 +65,9 @@ set ttymouse=xterm2
 set mouse=a
 
 " fzf mappings
-nmap <Leader>p :Files<CR>
+nmap <C-p> :Files<CR>
 nmap <Leader>b :Buffers<CR>
-nmap <C-p> :GFiles<CR>
+nmap <Leader>p :GFiles<CR>
 nmap <C-h> :Ag<CR>
 vmap <Leader>h "zy :Ag <C-R>z<CR>
 
