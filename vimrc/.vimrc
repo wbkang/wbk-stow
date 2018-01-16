@@ -53,6 +53,8 @@ nnoremap <Leader>f :Ack
 nnoremap <Leader>x :close<CR>
 " t for tree
 nnoremap <Leader>t :NERDTree<CR>
+" T for find in tree
+nnoremap <Leader>T :NERDTreeFind<CR>
 " o for outline
 nnoremap <Leader>o :TagBarToggle<CR>
 autocmd FileType python nnoremap <buffer> <F8> :call Autopep8()<CR>
