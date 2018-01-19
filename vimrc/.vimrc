@@ -54,6 +54,8 @@ nnoremap <Leader>f :Ack
 nnoremap <Leader>x :close<CR>
 " t for tree
 nnoremap <Leader>t :NERDTree<CR>
+" T for find in tree
+nnoremap <Leader>T :NERDTreeFind<CR>
 " o for outline
 nnoremap <Leader>o :TagBarToggle<CR>
 autocmd FileType python nnoremap <buffer> <F8> :call Autopep8()<CR>
@@ -66,10 +68,11 @@ set ttymouse=xterm2
 set mouse=a
 
 " fzf mappings
-nmap <Leader>p :Files<CR>
+nmap <C-p> :Files<CR>
 nmap <Leader>b :Buffers<CR>
-nmap <C-p> :GFiles<CR>
+nmap <Leader>p :GFiles<CR>
 nmap <C-h> :Ag<CR>
+vmap <Leader>h "zy :Ag <C-R>z<CR>
 
 
 " Session hax
@@ -115,3 +118,9 @@ autocmd FilterWritePre * call SetDiffColors()
 if has('gui_running') && has('win32')
     set guifont=Consolas:h12
 endif
+
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
