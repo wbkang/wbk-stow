@@ -15,6 +15,11 @@ fi
 autoload -U add-zsh-hook
 autoload -U colors && colors
 autoload -U compinit && compinit
+autoload -U promptinit && promptinit
+
+if which emerge > /dev/null; then
+    prompt gentoo
+fi
 
 # auto-complete case-insensitive, hyphen insensitive
 # partial-word matching. Copied from OMZ
