@@ -15,6 +15,11 @@ fi
 autoload -U add-zsh-hook
 autoload -U colors && colors
 autoload -U compinit && compinit
+autoload -U promptinit && promptinit
+
+if which emerge > /dev/null; then
+    prompt gentoo
+fi
 
 # auto-complete case-insensitive, hyphen insensitive
 # partial-word matching. Copied from OMZ
@@ -137,6 +142,9 @@ if which vim > /dev/null; then
 fi
 
 export PATH="$HOME/wbk/bin:$PATH"
+if [ -d ~/.local/bin ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # shift-tab auto-complete
 bindkey '^[[Z' reverse-menu-complete
@@ -202,4 +210,3 @@ fi
 
 alias install_vimplug="curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

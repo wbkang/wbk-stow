@@ -16,6 +16,7 @@ Plug 'valloric/youcompleteme'
 Plug 'sheerun/vim-polyglot'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
+Plug 'mitsuhiko/vim-jinja'
 call plug#end()
 
 let g:ycm_python_binary_path = 'python3'
