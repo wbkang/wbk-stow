@@ -56,9 +56,14 @@ setopt extended_glob
 # sync displays across terminals
 sync_display() {
 	display_file="/tmp/current_display.$UID"
-	if [ -z "$TMUX" ] && [ ! -z "$DISPLAY" ]; then
-		# if we are not in tmux & display is defined, then save this.
-		echo $DISPLAY > $display_file
+	if [ -z "$TMUX" ]; then
+        if [ ! -z "$DISPLAY" ]; then
+            # if we are not in tmux & display is defined, then save this.
+            echo $DISPLAY > $display_file
+        elif which xpra > /dev/null; then
+            export DISPLAY="$(xpra list | awk '/LIVE session at :/ {print $4}' | head -1)"
+            echo $DISPLAY > $display_file
+        fi
 	elif [ ! -z "$TMUX" ] && [ -f "$display_file" ]; then
 		export DISPLAY=`cat $display_file`
 	fi	
@@ -202,4 +207,3 @@ fi
 
 alias install_vimplug="curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
