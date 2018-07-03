@@ -203,7 +203,7 @@ reload_all_zsh() {
 start_xpra() {
     display="$1"
     port="$2"
-    xpra start "$1" --bind-tcp "$2" --daemon=no --speaker=disabled --pulseaudio=no --printing=no --mdns=no  --webcam=no --xvfb="Xorg -dpi 96 -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile ${HOME}/.xpra/Xvfb-$display.log -config ${HOME}/xorg.conf" 
+    xpra start "$1" --bind-tcp "$2" --daemon=no --speaker=disabled --pulseaudio=no --printing=no --mdns=no  --webcam=no --dpi=96 --xvfb="Xorg -dpi 96 -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile ${HOME}/.xpra/Xvfb-$display.log -config ${HOME}/wbk-stow/xdummy/xorg.conf" 
 }
 
 if [[ -f "$HOME/.cargo/env" ]]; then
