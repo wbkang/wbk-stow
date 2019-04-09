@@ -65,7 +65,7 @@ sync_display() {
         if [ ! -z "$DISPLAY" ]; then
             # if we are not in tmux & display is defined, then save this.
             echo $DISPLAY > $display_file
-        elif which xpra > /dev/null; then
+        elif which xpra >& /dev/null; then
             export DISPLAY="$(xpra list | awk '/LIVE session at :/ {print $4}' | head -1)"
             echo $DISPLAY > $display_file
         fi
