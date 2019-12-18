@@ -221,3 +221,7 @@ fi
 
 alias install_vimplug="curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
+fix_gnome_resize() {
+    gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+    gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+}
