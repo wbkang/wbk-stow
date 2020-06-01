@@ -164,8 +164,15 @@ if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
     export DISPLAY=localhost:0
     bindkey '^R' history-incremental-search-backward
     umask 022
-    # Docker on Windows host
-    export DOCKER_HOST=tcp://127.0.0.1:2375
+    export LIBGL_ALWAYS_INDIRECT=1
+fi
+
+if uname -a | grep -qi -- "-microsoft-standard" 2> /dev/null; then
+    my_ip=$(ip addr | grep -A 3 eth0 | grep "inet " | awk '{print $2}' | sed 's#/.*##g')
+    wsl_host=$(dig +noall +answer $(hostname -s) | tail -1 | cut -f 6)
+    echo "WSL2 detected. My ip: $my_ip, host ip: $wsl_host"
+    export DISPLAY=$wsl_host:0
+    export LIBGL_ALWAYS_INDIRECT=1
 fi
 
 # command not found handler
@@ -225,3 +232,6 @@ fix_gnome_resize() {
     gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
     gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
