@@ -107,14 +107,39 @@ change_title_to_command() {
     set_window_title "$1"
 }
 
+# https://stackoverflow.com/a/45336078/2710
+
+function spwd {
+  paths=(${(s:/:)PWD})
+
+  cur_path='/'
+  cur_short_path='/'
+  for directory in ${paths[@]}
+  do
+    cur_dir=''
+    for (( i=0; i<${#directory}; i++ )); do
+      cur_dir+="${directory:$i:1}"
+      matching=("$cur_path"/"$cur_dir"*/)
+      if [[ ${#matching[@]} -eq 1 ]]; then
+        break
+      fi
+    done
+    cur_short_path+="$cur_dir/"
+    cur_path+="$directory/"
+  done
+
+  printf %q "${cur_short_path: : -1}"
+  echo
+}
+
 add-zsh-hook preexec record_last_command_time
 add-zsh-hook preexec change_title_to_command
 add-zsh-hook precmd display_last_command_time
 add-zsh-hook precmd change_title_to_pwd
 
 # pretty prompt to my liking
-PROMPT="%{$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[green]%}%M"
-PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}%~ %{$fg_bold[cyan]%}[%!] %{$fg_bold[white]%}%# %{$reset_color%}"
+PROMPT="%{$fg_bold[yellow]%}%n%{$fg_bold[white]%}@%{$fg_bold[green]%}%m"
+PROMPT="$PROMPT%{$fg_bold[white]%} %{$fg_bold[blue]%}$(spwd) %{$fg_bold[cyan]%}[%!] %{$fg_bold[white]%}%# %{$reset_color%}"
 
 # pretty git log
 alias glog="git log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"
