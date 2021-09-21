@@ -181,6 +181,11 @@ if [ -d ~/.local/bin ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d ~/.pyenv/bin ]; then
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    echo "Adding pyenv to PATH"
+fi
+
 # shift-tab auto-complete
 bindkey '^[[Z' reverse-menu-complete
 bindkey "${terminfo[khome]}" beginning-of-line
