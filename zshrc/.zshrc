@@ -235,6 +235,9 @@ stty stop '^-'
 # stop rogue apps from changing stty
 ttyctl -f
 
+# fix the stupid vi-backspace behavior
+bindkey -M viins "^?" backward-delete-char
+
 # reload all of my zsh
 trap "echo Reloading zsh; exec zsh" USR1
 
