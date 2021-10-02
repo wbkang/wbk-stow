@@ -14,7 +14,8 @@ fi
 
 autoload -U add-zsh-hook
 autoload -U colors && colors
-autoload -U compinit && compinit
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
 autoload -U promptinit && promptinit
 
 # auto-complete case-insensitive, hyphen insensitive
@@ -204,11 +205,21 @@ fi
 
 if uname -a | grep -qi -- "-microsoft-standard" 2> /dev/null; then
     my_ip=$(ip addr | grep -A 3 eth0 | grep "inet " | awk '{print $2}' | sed 's#/.*##g')
-    wsl_host=$(dig +noall +answer $(hostname -s) | tail -1 | cut -f 6)
+    wsl_host=$(route | grep default | awk '{print $2}')
     echo "WSL2 detected. My ip: $my_ip, host ip: $wsl_host"
-    export DISPLAY=$wsl_host:0
+    export DISPLAY=":0"
     export LIBGL_ALWAYS_INDIRECT=1
 fi
+
+start_x11_forwarder() {
+    if ! [ -e /tmp/.X11-unix/X0 ]; then
+        mkdir -p /tmp/.X11-unix
+        echo "Starting X11 forwarder"
+        socat UNIX-LISTEN:/tmp/.X11-unix/X0,fork EXEC:"/mnt/c/Windows/System32/wsl.exe -d ubuntu-wsl1 socat - TCP\:localhost\:6000";
+    else
+        echo "Something already running"
+    fi
+}
 
 # command not found handler
 if [[ -f /etc/zsh_command_not_found ]]; then
@@ -273,3 +284,15 @@ fix_gnome_resize() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# remove windows python.exe
+#
+export PATH=$(echo "$PATH" | tr ":" "\n"  | grep -v "WindowsApps" | paste -s -d:)
+if [ -d ~/.pyenv ]; then
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+fi
+
+# awscli v2
+complete -C '/usr/local/bin/aws_completer' aws
