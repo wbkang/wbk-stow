@@ -37,6 +37,7 @@ zstyle ':completion:*' group-name ''
 
 # ignore completion functions
 zstyle ':completion:*:functions' ignored-patterns '_*'
+#zstyle ':completion:*' completer _expand _complete
 
 # pushd on cd
 setopt AUTO_PUSHD
@@ -296,3 +297,4 @@ fi
 
 # awscli v2
 complete -C '/usr/local/bin/aws_completer' aws
+alias trim="awk '{\$1=\$1};1'"
