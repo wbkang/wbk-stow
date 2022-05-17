@@ -142,9 +142,9 @@ function spwd_except_last {
     fi
 }
 
-add-zsh-hook preexec record_last_command_time
 add-zsh-hook preexec change_title_to_command
-add-zsh-hook precmd display_last_command_time
+#add-zsh-hook preexec record_last_command_time
+#add-zsh-hook precmd display_last_command_time
 add-zsh-hook precmd change_title_to_pwd
 
 setopt PROMPT_SUBST
@@ -298,3 +298,5 @@ fi
 # awscli v2
 complete -C '/usr/local/bin/aws_completer' aws
 alias trim="awk '{\$1=\$1};1'"
+
+RPROMPT=
