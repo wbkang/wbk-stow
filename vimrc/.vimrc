@@ -124,3 +124,6 @@ if has("mouse_sgr")
 else
     set ttymouse=xterm2
 end
+
+" make xterm clipboard work
+set clipboard=unnamedplus
