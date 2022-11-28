@@ -42,7 +42,7 @@ setopt AUTO_PUSHD
 # save history
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
-SAVEHIST=10000
+SAVEHIST=50000
 HISTDUPE=erase
 setopt hist_ignore_dups
 setopt appendhistory
@@ -292,3 +292,13 @@ complete -C '/usr/local/bin/aws_completer' aws
 alias trim="awk '{\$1=\$1};1'"
 
 RPROMPT=
+
+# https://superuser.com/a/1360645
+function readline_ANSI_escape() {
+  if [[ $# -ge 1 ]]; then
+    echo "$*"
+  else
+    cat  # Read string from STDIN
+  fi | \
+  perl -pe 's/(?:(?<!\x1)|(?<!\\\[))(\x1b\[[0-9;]*[mG])(?!\x2|\\\])/\x1\1\x2/g'
+}
