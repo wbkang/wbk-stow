@@ -6,9 +6,6 @@ if [[ -d ~/antigen ]]; then
     antigen bundle zsh-users/zsh-syntax-highlighting
     antigen bundle ssh-agent
 
-    if [[ "$(uname -o)" = "Cygwin" ]]; then
-        antigen bundle cygwin
-    fi
     antigen apply
 fi
 
@@ -227,11 +224,6 @@ if [[ -f /etc/zsh_command_not_found ]]; then
     source /etc/zsh_command_not_found
 fi
 
-# Cygwin hax
-if [[ "$(uname -o)" = "Cygwin" ]]; then
-    export DISPLAY=localhost:0
-	export SHELLOPTS="igncr"
-fi
 
 # antigen install
 install_antigen() {
@@ -254,7 +246,7 @@ bindkey -M viins "^?" backward-delete-char
 trap "echo Reloading zsh; exec zsh" USR1
 
 reload_all_zsh() {
-    pkill -U $USER --signal USR1 zsh
+    pkill -USR1 -U $USER zsh
 }
 
 start_xpra() {
