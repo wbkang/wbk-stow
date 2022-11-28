@@ -96,7 +96,6 @@ command RestoreSession call RestoreSession() | NERDTree
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_filetype_blacklist= {'c':1}
 
-color jellybeans
 
 " use ag for ack
 let g:ackprg = 'ag --vimgrep'
