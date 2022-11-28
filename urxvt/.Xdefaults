@@ -21,10 +21,17 @@ URxvt.color15:    #EEEEEC
 #URxvt.scrollTtyOutput:   false
 URxvt.scrollWithBuffer:  true
 URxvt.scrollTtyKeypress: true
-URxvt.perl-ext-common: default,selection-to-clipboard,52-osc,resize-font
+URxvt.perl-ext-common: default,selection-to-clipboard,52-osc,resize-font,matcher
 URxvt.clipboard.autocopy: true
 URxvt.keysym.Control-Meta-c: builtin-string:
 URxvt.keysym.Control-Meta-v: builtin-string:
+
+# https://google.com 
+
+URxvt.url-launcher: xdg-open
+URxvt.matcher.button: Ctrl-1
+#URxvt.matcher.pattern.2:  \\B(/\\S+?):(\\d+)(?=:|$)
+
 
 URxvt.iso14755: false
 URxvt.iso14755_52: false
