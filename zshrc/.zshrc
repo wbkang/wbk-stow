@@ -277,9 +277,11 @@ fix_gnome_resize() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# remove windows python.exe
-#
-export PATH=$(echo "$PATH" | tr ":" "\n"  | grep -v "WindowsApps" | paste -s -d:)
+# wsl only path cleanup
+if [ -f /proc/version ] && grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+    export PATH=$(echo "$PATH" | tr ":" "\n"  | grep -v "WindowsApps" | paste -s -d:)
+fi
+
 if [ -d ~/.pyenv ]; then
         export PYENV_ROOT="$HOME/.pyenv"
         export PATH="$PYENV_ROOT/bin:$PATH"
