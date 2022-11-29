@@ -60,10 +60,12 @@ sync_display() {
         if [ ! -z "$DISPLAY" ]; then
             # if we are not in tmux & display is defined, then save this.
             echo $DISPLAY > $display_file
-        elif which xpra >& /dev/null; then
-            export DISPLAY="$(xpra list | awk '/LIVE session at :/ {print $4}' | head -1)"
-            echo $DISPLAY > $display_file
         fi
+        # this is super slow on mac, so i disable it
+        #elif which xpra >& /dev/null; then
+        #    export DISPLAY="$(xpra list | awk '/LIVE session at :/ {print $4}' | head -1)"
+        #    echo $DISPLAY > $display_file
+        #fi
 	elif [ ! -z "$TMUX" ] && [ -f "$display_file" ]; then
 		export DISPLAY=`cat $display_file`
 	fi	
@@ -281,6 +283,11 @@ fix_gnome_resize() {
 }
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# wsl only path cleanup
+if [ -f /proc/version ] && grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+    export PATH=$(echo "$PATH" | tr ":" "\n"  | grep -v "WindowsApps" | paste -s -d:)
+fi
 
 # wsl only path cleanup
 if [ -f /proc/version ] && grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
