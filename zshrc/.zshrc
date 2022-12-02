@@ -170,6 +170,11 @@ bindkey '^[[Z' reverse-menu-complete
 # fix delete on gentoo
 bindkey "\x1b\x5b\x33\x7e" delete-char
 
+# home end
+bindkey -e "^[[1~" beginning-of-line
+bindkey -e "^[[4~" end-of-line
+
+
 if which vim > /dev/null; then
     export VISUAL=vim
     export EDITOR="$VISUAL"
@@ -304,3 +309,5 @@ function readline_ANSI_escape() {
   fi | \
   perl -pe 's/(?:(?<!\x1)|(?<!\\\[))(\x1b\[[0-9;]*[mG])(?!\x2|\\\])/\x1\1\x2/g'
 }
+
+
