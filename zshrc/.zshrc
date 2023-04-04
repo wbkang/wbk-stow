@@ -280,7 +280,7 @@ fix_gnome_resize() {
     gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # wsl only path cleanup
 if [ -f /proc/version ] && grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
