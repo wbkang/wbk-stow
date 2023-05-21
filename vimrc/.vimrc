@@ -126,3 +126,5 @@ end
 
 " make xterm clipboard work
 set clipboard=unnamedplus
+"sudo write trick from https://stackoverflow.com/a/7078429/2710
+cmap w!! w !sudo tee > /dev/null %
