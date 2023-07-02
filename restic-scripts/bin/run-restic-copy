@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -o pipefail
+
+source $(dirname $0)/restic-env
+source $(dirname $0)/restic-common.sh
+
+restic -r /autofs/zr-nas/restic-repo unlock
+restic -r /autofs/zr-nas/restic-repo copy --from-repo $RESTIC_REPOSITORY --limit-upload  10000 | tee $LOG | logger -t run-restic-copy
+restic -r /autofs/zr-nas/restic-repo forget --keep-last 50 --keep-hourly 720 --keep-daily 90 --keep-monthly 24 -g host --prune | tee $LOG | logger -t run-restic-copy

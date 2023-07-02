@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -o pipefail
+
+source $(dirname $0)/restic-env
+source $(dirname $0)/restic-common.sh
+
+repeat=0
+while [ "$repeat" -le 10 ]; do
+    restic unlock | log
+    if [ $? -ne 0 ]; then
+        repeat=$((repeat+1))
+        echo "Waiting for unlock, repeat:$repeat" | log
+        sleep 60
+    else
+        break
+    fi
+done
+restic forget --keep-last 50 --keep-hourly 720 --keep-daily 90 --keep-monthly 24 -g host --prune | log
