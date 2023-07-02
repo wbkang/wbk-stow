@@ -38,6 +38,7 @@ set ruler
 set showcmd
 set display=truncate
 set scrolloff=5
+color blue
 
 " Force saving files that require root permission 
 cnoremap w!! w !sudo tee > /dev/null %
