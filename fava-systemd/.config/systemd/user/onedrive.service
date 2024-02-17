@@ -1,0 +1,12 @@
+[Unit]
+Description=Onedrive one-way sync
+
+[Service]
+Type=simple
+WorkingDirectory=%h
+ExecStart=/usr/local/bin/onedrive --monitor --download-only 
+Restart=always
+
+
+[Install]
+WantedBy=default.target
