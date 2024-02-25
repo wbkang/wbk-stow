@@ -1,0 +1,11 @@
+[Unit]
+Description=fava %i
+
+[Service]
+Type=simple
+ExecStart=/home/wbk/.local/bin/fava -p ${BEANCOUNT_PORT_%i}  -H 0.0.0.0 --read-only ${BEANCOUNT_FILE_%i}
+Restart=always
+
+
+[Install]
+WantedBy=default.target
