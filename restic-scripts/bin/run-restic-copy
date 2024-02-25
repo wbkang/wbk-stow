@@ -1,12 +1,15 @@
 #!/bin/bash
 
 set -o pipefail
+set -e
 
 source $(dirname $0)/restic-env
 source $(dirname $0)/restic-common.sh
 
 # check first
 restic check
+# repo size is?
+sudo du -sh /mnt/nas/wbkang-pc/restic
 # mount autofs
 ls /autofs/zr-nas >/dev/null
 restic -r /autofs/zr-nas/restic-repo unlock
