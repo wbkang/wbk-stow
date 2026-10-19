@@ -5,4 +5,21 @@ set -o pipefail
 source $(dirname $0)/restic-env
 source $(dirname $0)/restic-common.sh
 
-restic backup -v --one-file-system / /mnt/nas/wbkang-pc-storage | log
+# --- Open WebUI: consistent SQLite snapshot before backup (best-effort; must never block the backup) ---
+# webui.db runs in WAL mode with the container writing live; a raw file copy can be torn (unopenable).
+# VACUUM INTO takes a proper read snapshot -> an always-openable copy that restic then sweeps normally.
+OWUI_DB=/mnt/fastdata/openwebui_data/webui.db
+OWUI_SNAP_DIR=/mnt/fastdata/openwebui_data/snapshots
+if [ -f "$OWUI_DB" ]; then
+    mkdir -p "$OWUI_SNAP_DIR"
+    rm -f "$OWUI_SNAP_DIR/webui.db.tmp"
+    if /usr/bin/sqlite3 "$OWUI_DB" "VACUUM INTO '$OWUI_SNAP_DIR/webui.db.tmp'" 2>/dev/null; then
+        mv -f "$OWUI_SNAP_DIR/webui.db.tmp" "$OWUI_SNAP_DIR/webui.db"
+    else
+        rm -f "$OWUI_SNAP_DIR/webui.db.tmp"
+        echo "WARN: open-webui sqlite snapshot failed" | log
+    fi
+fi
+# --- end Open WebUI snapshot ---
+
+restic backup -v --one-file-system / /mnt/nas/wbkang-pc-storage /mnt/fastdata | log
